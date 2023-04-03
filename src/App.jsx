@@ -1,8 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Admin from "./pages/Admin.jsx";
-import MovieHall from "./pages/MovieHall.jsx";
-import Home from "./pages/Home.jsx";
+import MovieHall from "./pages/moviehall/MovieHall.jsx";
+import Home from "./pages/home/Home.jsx";
+import Admin from "./pages/admin/Admin.jsx";
+import MovieDetails from "./pages/moviedetails/MovieDetails";
 
 function App() {
 	return (
@@ -12,6 +13,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/booking" element={<MovieHall />} />
+					<Route path="/movie/:id" element={<MovieDetails />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
