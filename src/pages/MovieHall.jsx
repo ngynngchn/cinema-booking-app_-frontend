@@ -4,6 +4,8 @@ import Seat from "../components/Seat.jsx";
 import { v4 as uuid4 } from "uuid";
 import "./MovieHall.css";
 
+// TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
+
 function MovieHall() {
 	const [seats, setSeats] = useState([]);
 	const [selection, setSelected] = useState([]);
