@@ -1,0 +1,21 @@
+.Seat {
+	all: unset;
+	width: 25px;
+	height: 25px;
+	border-radius: 4px;
+	background-color: grey;
+	cursor: pointer;
+}
+
+.Seat:hover {
+	background-color: greenyellow;
+}
+
+.selected {
+	background-color: greenyellow;
+}
+
+.reserved:hover {
+	background-color: red;
+	cursor: not-allowed;
+}
