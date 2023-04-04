@@ -15,14 +15,14 @@ function ScreeningForm() {
 
 	function handleSubmit(e) {
 		const formData = new FormData(e.target);
-		fetch("http://localhost:8888/api/seating", {
+		fetch("http://localhost:8888/api/create-screening", {
 			method: "POST",
 			body: formData,
 		})
 			.then((response) => response.json())
 			.then((data) => console.log(data));
 	}
-	// console.log(nowPlaying[0].original_title);
+	console.log(nowPlaying[0]);
 
 	return (
 		<div className="ScreeningForm">
@@ -31,7 +31,7 @@ function ScreeningForm() {
 				<select name="title" id="title">
 					{nowPlaying &&
 						nowPlaying.map((movie) => (
-							<option key={uuid4()} value="{movie.id}">
+							<option key={uuid4()} value={movie.id}>
 								{movie.original_title}
 							</option>
 						))}
