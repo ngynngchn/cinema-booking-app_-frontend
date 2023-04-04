@@ -7,15 +7,10 @@
 	cursor: pointer;
 }
 
-.Seat:hover {
+.Seat:not(.Seat:disabled):hover {
 	background: linear-gradient(145deg, #e84849, #c33c3d);
 }
 
 .selected {
 	background: linear-gradient(145deg, #e84849, #c33c3d);
-}
-
-.reserved:hover {
-	background: linear-gradient(145deg, #e84849, #c33c3d);
-	cursor: not-allowed;
 }
