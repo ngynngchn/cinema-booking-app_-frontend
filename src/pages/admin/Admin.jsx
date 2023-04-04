@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
+import GoBack from "../../components/confirmation/GoBack.jsx";
 
 function Admin() {
-	//https://api.themoviedb.org/3/movie/now_playing?api_key=d603b23be9d778e54ec780db901ad054&language=en-US&page=1&region=DE
-	// Get Movies that are playing at the moment and show as options
 	const [freeSeats, setFreeSeats] = useState([]);
 	const [totalSeats, setTotalSeats] = useState(0);
 	const [sales, setSales] = useState(0);
@@ -44,6 +43,7 @@ function Admin() {
 	return (
 		<div className="Admin">
 			<nav>
+				<GoBack />
 				<h2>Dashboard</h2>
 			</nav>
 			<section>
@@ -75,7 +75,7 @@ function Admin() {
 					<p>{freeSeats && freeSeats}</p>
 				</article>
 				<article className="sales">
-					<h4>Total sales: </h4>
+					<h4>Total revenue: </h4>
 					<p> ${sales && sales}</p>
 				</article>
 			</section>

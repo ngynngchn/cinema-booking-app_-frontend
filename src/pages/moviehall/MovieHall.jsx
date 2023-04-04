@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Seat from "../../components/Seat.jsx";
 import { v4 as uuid4 } from "uuid";
+import Seat from "../../components/Seat.jsx";
+import Confirmation from "../../components/confirmation/Confirmation.jsx";
+import GoBack from "../../components/confirmation/GoBack.jsx";
+
 import "./MovieHall.css";
 
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
@@ -10,6 +13,7 @@ function MovieHall() {
 	const [seats, setSeats] = useState([]);
 	const [selection, setSelected] = useState([]);
 	const [total, setTotal] = useState(0);
+	const [confirm, setConfirm] = useState(false);
 
 	useEffect(() => {
 		fetch("http://localhost:8888/api/reservations")
@@ -35,26 +39,49 @@ function MovieHall() {
 	};
 
 	const handleSubmit = () => {
-		fetch("http://localhost:8888/api/newReservations", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(selection),
-		})
-			.then((response) => response.json())
-			.then((data) => setSeats(data));
-		setSelected([]);
-		setTotal(0);
-	};
+		if (selection.length > 0) {
+			fetch("http://localhost:8888/api/newReservations", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(selection),
+			})
+				.then((response) => response.json())
+				.then((data) => setSeats(data));
 
-	// console.log(seats);
+			fetch("http://localhost:8888/email", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(selection),
+			})
+				.then((response) => {
+					console.log(response.status);
+					setConfirm(true);
+					setSelected([]);
+					setTotal(0);
+				})
+				.catch((err) => console.log(err));
+		} else {
+			alert("Please choose a Seat!");
+		}
+	};
 
 	return (
 		<div className="MovieHall">
+			{confirm && (
+				<Confirmation
+					data={selection}
+					movie="John Wick: Chapter 4"
+					time="31.03.2023 8:45 PM "
+				/>
+			)}
 			<main>
-				<section className="movieDetails">
-					<h3>John Wick 4</h3>
-					<p>31.03.2023 8:45 PM </p>
-				</section>
+				<nav>
+					<GoBack />
+					<section className="movieDetails">
+						<h3>John Wick: Chapter 4</h3>
+						<p>31.03.2023 8:45 PM </p>
+					</section>
+				</nav>
 				<div className="screen"></div>
 				<section className="seats">
 					<article>
@@ -93,7 +120,7 @@ function MovieHall() {
 				</section>
 				<section className="selection">
 					{selection?.map((selected) => (
-						<article>
+						<article key={uuid4()}>
 							<h5>{selected.type.toUpperCase()}</h5> <p> Seat {selected.id}</p>
 							<p> ${selected.price}</p>
 							<button
@@ -114,7 +141,9 @@ function MovieHall() {
 						<h5>YOUR TOTAL</h5> <p>${total}</p>
 					</article>
 				</section>
-				<button onClick={handleSubmit}>BOOK</button>
+				<button disabled={selection.length == 0} onClick={handleSubmit}>
+					BOOK
+				</button>
 			</main>
 		</div>
 	);
