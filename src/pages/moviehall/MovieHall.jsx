@@ -20,6 +20,7 @@ function MovieHall() {
 			.then((response) => response.json())
 			.then((data) => setSeats(data));
 	}, []);
+	console.log(seats);
 
 	// push selected Seats in to selection array
 	const chooseSeat = (e) => {
