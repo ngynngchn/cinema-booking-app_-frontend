@@ -15,8 +15,10 @@ function MovieHall() {
 	const [total, setTotal] = useState(0);
 	const [confirm, setConfirm] = useState(false);
 
+	const url = import.meta.env.VITE_BACKEND;
+
 	useEffect(() => {
-		fetch("http://localhost:8888/api/reservations")
+		fetch(url + "/api/reservations")
 			.then((response) => response.json())
 			.then((data) => setSeats(data));
 	}, []);
@@ -41,7 +43,7 @@ function MovieHall() {
 
 	const handleSubmit = () => {
 		if (selection.length > 0) {
-			fetch("http://localhost:8888/api/newReservations", {
+			fetch(url + "/api/new-reservation", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(selection),
@@ -49,7 +51,7 @@ function MovieHall() {
 				.then((response) => response.json())
 				.then((data) => setSeats(data));
 
-			fetch("http://localhost:8888/email", {
+			fetch(url + "/api/email", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(selection),

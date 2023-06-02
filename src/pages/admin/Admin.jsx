@@ -7,9 +7,10 @@ function Admin() {
 	const [totalSeats, setTotalSeats] = useState(0);
 	const [sales, setSales] = useState(0);
 
+	const url = import.meta.env.VITE_BACKEND;
 	function handleSubmit(e) {
 		const formData = new FormData(e.target);
-		fetch("http://localhost:8888/api/seating", {
+		fetch(url + "/api/seating", {
 			method: "POST",
 			body: formData,
 		})
@@ -18,7 +19,7 @@ function Admin() {
 	}
 
 	useEffect(() => {
-		fetch("http://localhost:8888/api/reservations")
+		fetch(url + "/api/reservations")
 			.then((response) => response.json())
 			.then((data) => getSales(data));
 	}, []);

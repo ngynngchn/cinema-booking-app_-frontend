@@ -4,6 +4,7 @@ import { v4 as uuid4 } from "uuid";
 
 function ScreeningForm() {
 	const [nowPlaying, setNowPlaying] = useState([]);
+	const url = import.meta.env.VITE_BACKEND;
 
 	useEffect(() => {
 		fetch(
@@ -13,9 +14,11 @@ function ScreeningForm() {
 			.then((data) => setNowPlaying(data.results));
 	}, []);
 
+	console.log(nowPlaying);
+
 	function handleSubmit(e) {
 		const formData = new FormData(e.target);
-		fetch("http://localhost:8888/api/create-screening", {
+		fetch(url + "/api/create-screening", {
 			method: "POST",
 			body: formData,
 		})
