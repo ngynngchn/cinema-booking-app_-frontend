@@ -14,6 +14,5 @@ function UserRoute() {
 export default UserRoute;
 
 const Layout = styled.div`
-	display: grid;
 	overflow: scroll;
 `;

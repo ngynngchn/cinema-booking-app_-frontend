@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import MovieCard from "../../components/movieCard/MovieCard";
-import styled from "styled-components";
 import Search from "../../components/basic/Search";
+import Carousell from "../../components/movie-carousell/Carousell";
+
+import styled from "styled-components";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
@@ -19,32 +20,40 @@ function Home() {
 
 	return (
 		<Window>
-			<div>
+			<Head>
 				<h2>Now in theatres</h2>
 				<Search />
-			</div>
-			<Carousell>
+			</Head>
+			<Carousell items={currentMovies} />
+			{/* <Carousell>
 				{currentMovies.map((movies) => (
 					<MovieCard data={movies} />
 				))}
-			</Carousell>
+			</Carousell> */}
 		</Window>
 	);
 }
 
 export default Home;
 
-const Carousell = styled.section`
-	display: flex;
-	gap: 1rem;
-	width: 100%;
-	overflow-x: scroll;
-`;
+// const Carousell = styled.section`
+// 	display: flex;
+// 	gap: 1rem;
+// 	width: 100%;
+// 	overflow-x: scroll;
+// 	scroll-snap-type: x mandatory;
+// `;
 
 const Window = styled.main`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	width: 100%;
+	overflow-x: scroll;
+`;
+const Head = styled.div`
 	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 `;
