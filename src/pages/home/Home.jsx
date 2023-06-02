@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "../../components/movieCard/MovieCard";
 import styled from "styled-components";
+import Search from "../../components/basic/Search";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
@@ -18,10 +19,10 @@ function Home() {
 
 	return (
 		<Window>
-			<h2>Welcome to our Theater</h2>
-			<Link to="/booking">Book your seat</Link>
-			<Link to="/admin">Admin</Link>
-			<h2>Now in Cinemas</h2>
+			<div>
+				<h2>Now in theatres</h2>
+				<Search />
+			</div>
 			<Carousell>
 				{currentMovies.map((movies) => (
 					<MovieCard data={movies} />
@@ -45,4 +46,5 @@ const Window = styled.main`
 	flex-direction: column;
 	gap: 1rem;
 	width: 100%;
+	padding: 1rem;
 `;

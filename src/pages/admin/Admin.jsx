@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
-import GoBack from "../../components/confirmation/GoBack.jsx";
-
+import GoBack from "../../components/basic/GoBack";
 function Admin() {
 	const [freeSeats, setFreeSeats] = useState([]);
 	const [totalSeats, setTotalSeats] = useState(0);
