@@ -19,7 +19,7 @@ function App() {
 					{/* <Route element={<UserRoute />}> */}
 					<Route path="/" element={<Home />} />
 					<Route path="/test" element={<ScreeningForm />} />
-					<Route path="/booking" element={<MovieHall />} />
+					<Route path="/booking/:id" element={<MovieHall />} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 					{/* </Route> */}
 				</Routes>
