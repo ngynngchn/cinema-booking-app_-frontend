@@ -21,13 +21,15 @@ const Card = styled.article`
 	height: 40vh;
 	scroll-snap-align: center;
 	cursor: pointer;
-	/* width: fit-content; */
 `;
 
 const Image = styled.img`
 	object-fit: cover;
-	aspect-ratio: 1 / 1;
+	aspect-ratio: 1 / 2;
 	height: 100%;
 	width: 30vw;
 	border-radius: 10px;
+	@media (max-width: 400px) {
+		width: 50vw;
+	}
 `;

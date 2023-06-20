@@ -16,9 +16,8 @@ function MovieDetails() {
 			.then((data) => setDetails(data))
 			.catch((err) => console.log(err));
 	}, []);
-
 	if (!details) return;
-	console.log(details);
+
 	return (
 		<Window $image={details.poster_path}>
 			<Header>
@@ -36,7 +35,7 @@ function MovieDetails() {
 				</Genres>
 				<Overview>{details.overview}</Overview>
 			</Description>
-			<BookingButton onClick={() => navigate("/booking")}>
+			<BookingButton onClick={() => navigate(`/booking/${params.id}`)}>
 				Book tickets
 			</BookingButton>
 		</Window>
@@ -58,8 +57,8 @@ const Window = styled.main`
 			rgba(255, 255, 255, 0) 0%,
 			rgba(0, 0, 0, 1) 70%
 		),
-		url(https://image.tmdb.org/t/p/original/${(props) => props.$image}) 100% /
-			cover no-repeat;
+		url(https://image.tmdb.org/t/p/original/${(props) => props.$image}) center
+			100% / cover no-repeat;
 `;
 
 const Header = styled.header`
@@ -69,13 +68,6 @@ const Header = styled.header`
 
 const Title = styled.h1`
 	font-size: 1.3rem;
-`;
-
-const Badge = styled.a`
-	border-radius: 10px;
-	backdrop-filter: blur(10px);
-	background-color: #ece3e3f4;
-	padding: 0.3rem 0.6rem;
 `;
 
 const BookingButton = styled.button`
@@ -97,6 +89,16 @@ const Overview = styled.p`
 
 const Genres = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.5rem;
 	justify-content: center;
+	width: 100%;
+	/* background-color: green; */
+`;
+const Badge = styled.a`
+	text-wrap: nowrap;
+	border-radius: 7px;
+	backdrop-filter: blur(10px);
+	background-color: #ece3e3f4;
+	padding: 0.2rem 0.6rem;
 `;

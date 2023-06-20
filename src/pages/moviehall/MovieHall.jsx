@@ -1,10 +1,10 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { v4 as uuid4 } from "uuid";
-import Seat from "../../components/Seat.jsx";
+import "./MovieHall.css";
 import Confirmation from "../../components/confirmation/Confirmation.jsx";
 import GoBack from "../../components/basic/GoBack.jsx";
-import "./MovieHall.css";
+import SeatingPlan from "../../components/SeatingPlan.jsx";
 
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
 
@@ -13,15 +13,22 @@ function MovieHall() {
 	const [selection, setSelected] = useState([]);
 	const [total, setTotal] = useState(0);
 	const [confirm, setConfirm] = useState(false);
+	const [details, setDetails] = useState();
 
 	const url = import.meta.env.VITE_BACKEND;
+	const apiKey = import.meta.env.VITE_API_KEY;
+	const params = useParams();
 
 	useEffect(() => {
+		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}`)
+			.then((response) => response.json())
+			.then((data) => setDetails(data))
+			.catch((err) => console.log(err));
+
 		fetch(url + "/api/reservations")
 			.then((response) => response.json())
 			.then((data) => setSeats(data));
 	}, []);
-	console.log(seats);
 
 	// push selected Seats in to selection array
 	const chooseSeat = (e) => {
@@ -39,6 +46,10 @@ function MovieHall() {
 			}
 		}
 	};
+
+	if (!details) return;
+
+	console.log(details);
 
 	const handleSubmit = () => {
 		if (selection.length > 0) {
@@ -66,64 +77,32 @@ function MovieHall() {
 			alert("Please choose a Seat!");
 		}
 	};
+	if (!seats) return;
 
 	return (
 		<div className="MovieHall">
 			{confirm && (
 				<Confirmation
 					data={selection}
-					movie="John Wick: Chapter 4"
+					movie={details.original_title}
 					time="31.03.2023 8:45 PM "
 				/>
 			)}
-			<main>
-				<nav>
-					<GoBack />
-					<section className="movieDetails">
-						<h3>John Wick: Chapter 4</h3>
-						<p>31.03.2023 8:45 PM </p>
-					</section>
-				</nav>
-				<div className="screen"></div>
-				<section className="seats">
-					<article>
-						{seats &&
-							seats[0]?.map((seat) => (
-								<Seat
-									data={seat}
-									key={uuid4()}
-									onClick={chooseSeat}
-									active={selection.includes(seat)}
-								/>
-							))}
-					</article>
-					<article>
-						{seats &&
-							seats[1]?.map((seat) => (
-								<Seat
-									data={seat}
-									key={uuid4()}
-									onClick={chooseSeat}
-									active={selection.includes(seat)}
-								/>
-							))}
-					</article>
-					<section className="legend">
-						<p>
-							<span className="free"></span>available
-						</p>
-						<p>
-							<span className="reserved"></span>reserved
-						</p>
-						<p>
-							<span className="selected"></span>selected
-						</p>
-					</section>
+			<nav>
+				<GoBack />
+				<section className="movieDetails">
+					<h3>{details.original_title}</h3>
+					<p>31.03.2023 8:45 PM </p>
 				</section>
+			</nav>
+			<main>
+				<div className="screen"></div>
+				<SeatingPlan seats={seats} onclick={chooseSeat} selection={selection} />
 				<section className="selection">
 					{selection?.map((selected) => (
 						<article key={uuid4()}>
-							<h5>{selected.type.toUpperCase()}</h5> <p> Seat {selected.id}</p>
+							<h5>{selected.type.toUpperCase()}</h5>
+							<p> Seat {selected.id}</p>
 							<p> ${selected.price}</p>
 							<button
 								value={selected.id}
@@ -143,6 +122,7 @@ function MovieHall() {
 						<h5>YOUR TOTAL</h5> <p>${total}</p>
 					</article>
 				</section>
+
 				<button disabled={selection.length == 0} onClick={handleSubmit}>
 					BOOK
 				</button>

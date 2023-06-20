@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import MovieCard from "../../components/movieCard/MovieCard";
+
 import Search from "../../components/basic/Search";
 import Carousell from "../../components/movie-carousell/Carousell";
 
 import styled from "styled-components";
+import DateSelector from "../../components/DateSelector";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
+
+	// (1) update current movies
 	useEffect(() => {
 		fetch(
 			"https://api.themoviedb.org/3/movie/now_playing?api_key=d603b23be9d778e54ec780db901ad054&language=en-US&page=1&region=DE"
@@ -14,9 +17,8 @@ function Home() {
 			.then((response) => response.json())
 			.then((data) => setCurrentMovies(data.results));
 	}, []);
-	console.log(currentMovies);
 
-	if (!currentMovies) return;
+	if (!currentMovies) return null;
 
 	return (
 		<Window>
@@ -24,6 +26,7 @@ function Home() {
 				<h2>Now in theatres</h2>
 				<Search />
 			</Head>
+			<DateSelector />
 			<Carousell items={currentMovies} />
 			{/* <Carousell>
 				{currentMovies.map((movies) => (
