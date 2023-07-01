@@ -1,70 +1,8 @@
-.MovieHall main:not(.Confirmation main) {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 3rem;
-}
-
-.MovieHall {
-	position: relative;
-}
-
 .backIcon {
 	font-size: 2rem;
 	cursor: pointer;
 }
 
-.movieDetails {
-	display: flex;
-	flex-direction: column;
-	background-color: black;
-	align-items: flex-start;
-	border-radius: 3px;
-	padding: 0.5rem;
-	width: 100%;
-}
-.screen {
-	width: 280px;
-	height: 10px;
-	border-radius: 4px;
-	background-color: white;
-}
-nav {
-	padding: 1rem 0.5rem;
-}
-/* span {
-	display: inline-block;
-	height: 13px;
-	width: 13px;
-	border-radius: 50%;
-} */
-/* 
-.reserved {
-	background: linear-gradient(145deg, #1d1d1d, #181818);
-} */
 .reserved:hover {
 	cursor: not-allowed;
-}
-/* 
-.free {
-	background: linear-gradient(145deg, #f2f2f2, #e6e6e6);
-} */
-
-.selection {
-	background: linear-gradient(145deg, #e84849, #c33c3d);
-	border-radius: 3px;
-	width: 100%;
-}
-
-.selection article {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.5rem;
-	padding: 0.5rem;
-}
-
-.selection button {
-	padding: 4px 8px;
-	cursor: pointer;
 }

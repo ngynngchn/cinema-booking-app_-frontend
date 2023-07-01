@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { v4 as uuid4 } from "uuid";
+import { useParams } from "react-router-dom";
 import "./MovieHall.css";
+
+import styled from "styled-components";
 import Confirmation from "../../components/confirmation/Confirmation.jsx";
 import GoBack from "../../components/basic/GoBack.jsx";
 import SeatingPlan from "../../components/SeatingPlan.jsx";
+import SeatSelection from "../../components/SeatSelection.jsx";
+import Row from "../../components/Row";
 
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
 
@@ -77,10 +81,11 @@ function MovieHall() {
 			alert("Please choose a Seat!");
 		}
 	};
+	console.log(selection);
 	if (!seats) return;
 
 	return (
-		<div className="MovieHall">
+		<Hall>
 			{confirm && (
 				<Confirmation
 					data={selection}
@@ -88,47 +93,99 @@ function MovieHall() {
 					time="31.03.2023 8:45 PM "
 				/>
 			)}
-			<nav>
+			<Header>
 				<GoBack />
 				<section className="movieDetails">
 					<h3>{details.original_title}</h3>
-					<p>31.03.2023 8:45 PM </p>
 				</section>
-			</nav>
+				<GoBack />
+			</Header>
+
 			<main>
-				<div className="screen"></div>
+				<Screen />
+
 				<SeatingPlan seats={seats} onclick={chooseSeat} selection={selection} />
-				<section className="selection">
+
+				<SeatSelection total={total}>
 					{selection?.map((selected) => (
-						<article key={uuid4()}>
-							<h5>{selected.type.toUpperCase()}</h5>
-							<p> Seat {selected.id}</p>
-							<p> ${selected.price}</p>
-							<button
-								value={selected.id}
-								onClick={() => {
-									setSelected(
-										selection.filter((seat) => seat.id !== selected.id)
-									);
-									setTotal(0);
-								}}>
-								X
-							</button>
-						</article>
+						<Row
+							key={uuid4()}
+							selected={selected}
+							onclick={() => {
+								setSelected(
+									selection.filter((seat) => seat.id !== selected.id)
+								);
+								setTotal(0);
+							}}
+						/>
 					))}
+				</SeatSelection>
 
-					<hr />
-					<article>
-						<h5>YOUR TOTAL</h5> <p>${total}</p>
-					</article>
-				</section>
+				<Date>31.03.2023 8:45 PM </Date>
 
-				<button disabled={selection.length == 0} onClick={handleSubmit}>
+				<Button disabled={selection.length == 0} onClick={handleSubmit}>
 					BOOK
-				</button>
+				</Button>
 			</main>
-		</div>
+		</Hall>
 	);
 }
 
 export default MovieHall;
+
+const Hall = styled.div`
+	position: relative;
+	padding: 1rem;
+	height: 100%;
+	main:not(.Confirmation main) {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	::before {
+		content: " ";
+		position: absolute;
+		inset: 0 0;
+		background-color: white;
+		box-shadow: 0 0 150px 150px #ffffff5a;
+		width: 1px;
+		height: 1px;
+		border-radius: 50%;
+	}
+`;
+
+const Screen = styled.div`
+	width: 360px;
+	height: 100px;
+	border: solid 5px #c33c3d;
+	border-color: #c33c3d transparent transparent transparent;
+	border-radius: 60%/100px 100px 0 0;
+`;
+const Header = styled.nav`
+	padding: 1rem 0.5rem;
+	section {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+		width: 100%;
+		align-items: center;
+		h3 {
+			font-size: 1rem;
+		}
+	}
+`;
+
+const Date = styled.p`
+	background-color: #292929;
+	border-radius: 5px;
+	padding: 0.5rem;
+	margin: 1rem;
+`;
+
+const Button = styled.button`
+	background: linear-gradient(145deg, #e84849, #c33c3d);
+	box-shadow: 0px 10px 100px 0px #c4504178;
+	/* margin: 1rem; */
+	width: 100%;
+`;
