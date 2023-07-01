@@ -63,7 +63,7 @@ const Hall = styled.section`
 	gap: 1rem;
 	border-radius: 5px;
 	padding: 10px;
-	background-color: black;
+	/* background-color: black; */
 `;
 
 const Seats = styled.article`
