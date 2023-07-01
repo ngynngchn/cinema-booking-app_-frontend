@@ -53,6 +53,7 @@ const Window = styled.main`
 	gap: 1rem;
 	width: 100%;
 	overflow-x: scroll;
+	height: 100%;
 `;
 const Head = styled.div`
 	padding: 1rem;

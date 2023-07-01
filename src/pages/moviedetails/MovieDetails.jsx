@@ -36,7 +36,7 @@ function MovieDetails() {
 				<Overview>{details.overview}</Overview>
 			</Description>
 			<BookingButton onClick={() => navigate(`/booking/${params.id}`)}>
-				Book tickets
+				Buy Ticket
 			</BookingButton>
 		</Window>
 	);
@@ -72,7 +72,8 @@ const Title = styled.h1`
 
 const BookingButton = styled.button`
 	border-radius: 10px;
-	background-color: #372f2f;
+	background: linear-gradient(145deg, #e84849, #c33c3d);
+	box-shadow: 0px 10px 100px 0px #c4504178;
 	border: none;
 	grid-row: 5/6;
 `;
@@ -82,9 +83,14 @@ const Description = styled.div`
 	gap: 0.5rem;
 	grid-row: 3/4;
 	overflow-y: scroll;
+	justify-content: flex-end;
+	h4 {
+		font-size: 0.9rem;
+	}
 `;
 const Overview = styled.p`
 	overflow-y: scroll;
+	font-size: 0.8rem;
 `;
 
 const Genres = styled.div`
@@ -101,4 +107,5 @@ const Badge = styled.a`
 	backdrop-filter: blur(10px);
 	background-color: #ece3e3f4;
 	padding: 0.2rem 0.6rem;
+	font-size: 0.7rem;
 `;

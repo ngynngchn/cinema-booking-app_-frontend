@@ -55,7 +55,7 @@ function Carousell({ items }) {
 	const containerRef = useRef(null);
 
 	return (
-		<>
+		<CarousellWindow>
 			<Wrapper
 				ref={containerRef}
 				onTouchStart={handleSwipe}
@@ -94,15 +94,15 @@ function Carousell({ items }) {
 				</AnimatePresence>
 			</Wrapper>
 
-			<div className="buttons">
+			<Buttons>
 				<m.button whileTap={{ scale: 0.8 }} onClick={() => handleClick(-1)}>
 					◀︎
 				</m.button>
 				<m.button whileTap={{ scale: 0.8 }} onClick={() => handleClick(1)}>
 					▶︎
 				</m.button>
-			</div>
-		</>
+			</Buttons>
+		</CarousellWindow>
 	);
 }
 
@@ -131,8 +131,20 @@ const zIndex = {
 
 export default Carousell;
 
+const CarousellWindow = styled.section`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+`;
+
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	overflow: hidden;
+`;
+
+const Buttons = styled.div`
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
 `;

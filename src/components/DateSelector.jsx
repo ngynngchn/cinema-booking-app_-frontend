@@ -43,7 +43,7 @@ export default DateSelector;
 
 const DateContainer = styled.section`
 	width: 100%;
-	height: 5rem;
+	height: 7rem;
 	display: flex;
 	overflow-x: scroll;
 	gap: 1rem;
@@ -51,6 +51,7 @@ const DateContainer = styled.section`
 `;
 
 const DateLabel = styled.label`
+	width: 3rem;
 	/* position: relative; */
 `;
 
