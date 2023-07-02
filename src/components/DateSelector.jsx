@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
+import { motion as m } from "framer-motion";
 import styled from "styled-components";
 
 import { createWeekday } from "../helper.js";
 function DateSelector() {
-	const [selectedDate, setSelectedDate] = useState(new Date());
 	const startDate = new Date();
+	const [selectedDate, setSelectedDate] = useState(createWeekday(startDate));
 
 	const handleChange = (event) => {
 		console.log(event.target.value);
@@ -20,7 +21,7 @@ function DateSelector() {
 			let date = createWeekday(currentDate);
 			dateLabels.push(date);
 		}
-
+		console.log(selectedDate);
 		return dateLabels.map((label, index) => (
 			<>
 				<DateLabel key={index}>
@@ -28,9 +29,10 @@ function DateSelector() {
 						type="radio"
 						name="date"
 						value={label}
+						checked={selectedDate == label}
 						onChange={handleChange}
 					/>
-					<Label>{label}</Label>
+					<Label whileTap={{ scale: 0.97 }}>{label}</Label>
 				</DateLabel>
 			</>
 		));
@@ -43,30 +45,34 @@ export default DateSelector;
 
 const DateContainer = styled.section`
 	width: 100%;
-	height: 7rem;
 	display: flex;
 	overflow-x: scroll;
 	gap: 1rem;
-	padding: 0.5rem;
+	padding: 0.5rem 0;
 `;
 
 const DateLabel = styled.label`
-	width: 3rem;
+	/* width: 4rem; */
 	/* position: relative; */
 `;
 
-const Label = styled.p`
+const Label = styled(m.p)`
 	padding: 0.5rem;
-	border-radius: 4px;
-	border: 1px solid grey;
+	min-width: 3rem;
+	height: 4rem;
+	border-radius: 10px;
+	position: relative;
 	cursor: pointer;
+	background: linear-gradient(145deg, #1d1d1d, #181818);
+
 	&:hover {
-		background-color: grey;
+		background-color: #161616;
 	}
 `;
 const DateInput = styled.input`
 	all: unset;
 	&:checked + ${Label} {
-		background-color: grey;
+		background: linear-gradient(145deg, #f2f2f2, #e6e6e6);
+		color: #222222;
 	}
 `;
