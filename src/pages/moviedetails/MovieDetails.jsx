@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import styled from "styled-components";
 import BackButton from "../../components/basic/GoBack.jsx";
 import FavoriteButton from "../../components/basic/FavoriteButton.jsx";
@@ -18,8 +19,31 @@ function MovieDetails() {
 	}, []);
 	if (!details) return;
 
+	const routeVariants = {
+		initial: {
+			x: "100%",
+		},
+		final: {
+			x: "0vw",
+		},
+	};
+
 	return (
-		<Window $image={details.poster_path}>
+		<Window
+			$image={details.poster_path}
+			variants={routeVariants}
+			initial="initial"
+			animate="final"
+			exit="initial"
+			transition={{ duration: 0.2 }}
+			key="moviedetails">
+			{/* <m.img
+				layoutId="poster"
+				transition={{ duration: 0.3 }}
+				src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
+				alt="poster"
+				width="100%"
+			/> */}
 			<Header>
 				<BackButton />
 				<FavoriteButton />
@@ -29,13 +53,15 @@ function MovieDetails() {
 				<h4>⭐️ {details.vote_average.toFixed(2)}</h4>
 				<Title>{details.title}</Title>
 				<Genres>
-					{details.genres.map((genre) => (
-						<Badge>{genre.name}</Badge>
+					{details.genres.map((genre, index) => (
+						<Badge key={index}>{genre.name}</Badge>
 					))}
 				</Genres>
 				<Overview>{details.overview}</Overview>
 			</Description>
-			<BookingButton onClick={() => navigate(`/booking/${params.id}`)}>
+			<BookingButton
+				whileTap={{ scale: 0.97 }}
+				onClick={() => navigate(`/booking/${params.id}`)}>
 				Buy Ticket
 			</BookingButton>
 		</Window>
@@ -44,14 +70,14 @@ function MovieDetails() {
 
 export default MovieDetails;
 
-const Window = styled.main`
+const Window = styled(m.main)`
 	position: relative;
 	padding: 2rem;
 	display: grid;
 	gap: 0.5rem;
 	grid-template-rows: min-content 1fr 1.5fr min-content;
 	width: 100%;
-	height: 100dvh;
+	height: 100%;
 	background: linear-gradient(
 			180deg,
 			rgba(255, 255, 255, 0) 0%,
@@ -70,7 +96,7 @@ const Title = styled.h1`
 	font-size: 1.3rem;
 `;
 
-const BookingButton = styled.button`
+const BookingButton = styled(m.button)`
 	border-radius: 10px;
 	background: linear-gradient(145deg, #e84849, #c33c3d);
 	box-shadow: 0px 10px 100px 0px #c4504178;

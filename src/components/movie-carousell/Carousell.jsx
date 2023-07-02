@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 function Carousell({ items }) {
 	const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
-	// const items = ["🍔", "🍕", "🌭", "🍗"];
 	// we want the scope to be always to be in the scope of the array so that the carousel is endless
 	const indexInArrayScope =
 		((activeIndex % items.length) + items.length) % items.length;
@@ -135,6 +134,7 @@ const CarousellWindow = styled.section`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	z-index: 0;
 `;
 
 const Wrapper = styled.div`

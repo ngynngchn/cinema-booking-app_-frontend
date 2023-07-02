@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { v4 as uuid4 } from "uuid";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import "./MovieHall.css";
 
 import styled from "styled-components";
@@ -9,6 +10,8 @@ import GoBack from "../../components/basic/GoBack.jsx";
 import SeatingPlan from "../../components/SeatingPlan.jsx";
 import SeatSelection from "../../components/SeatSelection.jsx";
 import Row from "../../components/Row";
+import DateSelector from "../../components/DateSelector";
+import TimeSelector from "../../components/TimeSelector";
 
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
 
@@ -20,21 +23,28 @@ function MovieHall() {
 	const [details, setDetails] = useState();
 
 	const url = import.meta.env.VITE_BACKEND;
-	const apiKey = import.meta.env.VITE_API_KEY;
 	const params = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}`)
-			.then((response) => response.json())
-			.then((data) => setDetails(data))
-			.catch((err) => console.log(err));
-
 		fetch(url + `/api/reservations/${params.id}`)
 			.then((response) => response.json())
-			.then((data) => setSeats(data.seats));
+			.then((data) => {
+				setSeats(data.seats);
+				setDetails(data.details);
+			});
 	}, []);
 
-	// push selected Seats in to selection array
+	const routeVariants = {
+		initial: {
+			y: "100vw",
+		},
+		final: {
+			y: "0vw",
+		},
+	};
+
+	// push selected seats in to selection array
 	const chooseSeat = (e) => {
 		let id = e.target.value;
 		// get the object with the elements id (.flat() flattens an array)
@@ -51,9 +61,9 @@ function MovieHall() {
 		}
 	};
 
-	if (!details) return;
-
-	console.log(details);
+	if (!details) {
+		return;
+	}
 
 	const handleSubmit = () => {
 		if (selection.length > 0) {
@@ -81,22 +91,28 @@ function MovieHall() {
 			alert("Please choose a Seat!");
 		}
 	};
-	console.log("selection", selection);
+
 	if (!seats) return;
 
 	return (
-		<Hall>
+		<Hall
+			variants={routeVariants}
+			initial="initial"
+			animate="final"
+			exit="initial"
+			transition={{ duration: 0.2 }}
+			key={params.id}>
 			{confirm && (
 				<Confirmation
 					data={selection}
-					movie={details.original_title}
-					time="31.03.2023 8:45 PM "
+					movie={details.title}
+					time={`${details.date} ${details.time} PM `}
 				/>
 			)}
 			<Header>
 				<GoBack />
 				<section className="movieDetails">
-					<h3>{details.original_title}</h3>
+					<h3>{details.title}</h3>
 				</section>
 				<GoBack />
 			</Header>
@@ -106,7 +122,14 @@ function MovieHall() {
 
 				<SeatingPlan seats={seats} onclick={chooseSeat} selection={selection} />
 
-				<SeatSelection total={total}>
+				<DateSelector />
+				<TimeSelector />
+
+				<SeatSelection
+					total={total}
+					selection={selection}
+					onClick={handleSubmit}
+					disabled={selection.length == 0}>
 					{selection?.map((selected) => (
 						<Row
 							key={uuid4()}
@@ -120,12 +143,6 @@ function MovieHall() {
 						/>
 					))}
 				</SeatSelection>
-
-				<Date>31.03.2023 8:45 PM </Date>
-
-				<Button disabled={selection.length == 0} onClick={handleSubmit}>
-					BOOK
-				</Button>
 			</main>
 		</Hall>
 	);
@@ -133,13 +150,15 @@ function MovieHall() {
 
 export default MovieHall;
 
-const Hall = styled.div`
+const Hall = styled(m.div)`
 	position: relative;
 	padding: 1rem;
 	height: 100%;
+	width: 100%;
 	main:not(.Confirmation main) {
-		height: 100%;
+		/* height: 100%; */
 		display: flex;
+		gap: 0.5rem;
 		flex-direction: column;
 		align-items: center;
 	}
@@ -184,8 +203,10 @@ const Date = styled.p`
 `;
 
 const Button = styled.button`
+	border-radius: 10px;
 	background: linear-gradient(145deg, #e84849, #c33c3d);
 	box-shadow: 0px 10px 100px 0px #c4504178;
 	/* margin: 1rem; */
 	width: 100%;
+	justify-content: flex-end;
 `;

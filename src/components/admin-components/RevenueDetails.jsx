@@ -19,6 +19,8 @@ function RevenueDetails({ id }) {
 			});
 	}, []);
 
+	console.log(id);
+
 	function getSales(admin) {
 		let total = 0;
 		let freeSeats = 0;
@@ -34,6 +36,7 @@ function RevenueDetails({ id }) {
 		});
 		setFreeSeats(freeSeats);
 		setSales(total);
+		setTotalSeats(totalSeats);
 	}
 
 	if (!details) return;
@@ -44,7 +47,9 @@ function RevenueDetails({ id }) {
 			<p>{details.title}</p>
 			<article className="freeSeats">
 				<h4>Available seats</h4>
-				<p>{freeSeats && freeSeats}</p>
+				<p>
+					{freeSeats && freeSeats} / {totalSeats && totalSeats}
+				</p>
 			</article>
 			<article className="sales">
 				<h4>Total revenue </h4>
@@ -61,4 +66,7 @@ const Card = styled.section`
 	width: fit-content;
 	border-radius: 10px;
 	padding: 0.5rem;
+	width: 50%;
+	margin: 1rem;
+	display: inline-block;
 `;

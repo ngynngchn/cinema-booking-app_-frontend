@@ -19,7 +19,7 @@ const SeatElement = styled.button`
 	all: unset;
 	width: 25px;
 	height: 25px;
-	border-radius: 4px;
+	border-radius: 8px;
 	cursor: pointer;
 	background: ${({ status }) => {
 		switch (status) {

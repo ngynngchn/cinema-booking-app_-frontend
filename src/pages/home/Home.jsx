@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { motion as m } from "framer-motion";
 
 import Search from "../../components/basic/Search";
 import Carousell from "../../components/movie-carousell/Carousell";
 
 import styled from "styled-components";
-import DateSelector from "../../components/DateSelector";
+import MenuToggle from "../../components/menu/MenuToggle";
+import Menu from "../../components/menu/Menu";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
@@ -20,13 +22,28 @@ function Home() {
 
 	if (!currentMovies) return null;
 
+	const routeVariants = {
+		initial: {
+			x: "100vh",
+		},
+		final: {
+			x: "0vh",
+		},
+	};
+
 	return (
-		<Window>
+		<Window
+			key="home"
+			variants={routeVariants}
+			initial="initial"
+			animate="final"
+			transition={{ duration: 0.3 }}>
 			<Head>
 				<h2>Now in theatres</h2>
-				<Search />
+				{/* <Search /> */}
+				<Menu />
 			</Head>
-			<DateSelector />
+			<h3>Showing Now</h3>
 			<Carousell items={currentMovies} />
 			{/* <Carousell>
 				{currentMovies.map((movies) => (
@@ -47,7 +64,7 @@ export default Home;
 // 	scroll-snap-type: x mandatory;
 // `;
 
-const Window = styled.main`
+const Window = styled(m.main)`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
