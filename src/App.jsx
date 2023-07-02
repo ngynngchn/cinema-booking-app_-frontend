@@ -7,6 +7,7 @@ import MovieDetails from "./pages/moviedetails/MovieDetails.jsx";
 import ScreeningForm from "./components/screening-form/ScreeningForm.jsx";
 import AdminRoute from "./pages/auth/AdminRoute";
 import UserRoute from "./pages/auth/UserRoute";
+import AdminTest from "./pages/AdminTest";
 
 function App() {
 	return (
@@ -18,7 +19,7 @@ function App() {
 					</Route>
 					{/* <Route element={<UserRoute />}> */}
 					<Route path="/" element={<Home />} />
-					<Route path="/test" element={<ScreeningForm />} />
+					<Route path="/test" element={<AdminTest />} />
 					<Route path="/booking/:id" element={<MovieHall />} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 					{/* </Route> */}

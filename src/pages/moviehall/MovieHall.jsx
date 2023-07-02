@@ -29,9 +29,9 @@ function MovieHall() {
 			.then((data) => setDetails(data))
 			.catch((err) => console.log(err));
 
-		fetch(url + "/api/reservations")
+		fetch(url + `/api/reservations/${params.id}`)
 			.then((response) => response.json())
-			.then((data) => setSeats(data));
+			.then((data) => setSeats(data.seats));
 	}, []);
 
 	// push selected Seats in to selection array
@@ -57,7 +57,7 @@ function MovieHall() {
 
 	const handleSubmit = () => {
 		if (selection.length > 0) {
-			fetch(url + "/api/new-reservation", {
+			fetch(url + `/api/new-reservation/${params.id}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(selection),
@@ -81,7 +81,7 @@ function MovieHall() {
 			alert("Please choose a Seat!");
 		}
 	};
-	console.log(selection);
+	console.log("selection", selection);
 	if (!seats) return;
 
 	return (

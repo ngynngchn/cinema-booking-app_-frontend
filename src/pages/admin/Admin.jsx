@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
+import styled from "styled-components";
 import GoBack from "../../components/basic/GoBack";
+
 function Admin() {
 	const [freeSeats, setFreeSeats] = useState([]);
 	const [totalSeats, setTotalSeats] = useState(0);
 	const [sales, setSales] = useState(0);
 
 	const url = import.meta.env.VITE_BACKEND;
+
 	function handleSubmit(e) {
 		const formData = new FormData(e.target);
 		fetch(url + "/api/seating", {

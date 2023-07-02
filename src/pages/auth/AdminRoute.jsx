@@ -1,5 +1,7 @@
+import { Outlet } from "react-router-dom";
+
 function AdminRoute() {
-	return <h2> ADMIN</h2>;
+	return <Outlet />;
 }
 
 export default AdminRoute;
