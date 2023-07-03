@@ -10,8 +10,9 @@ function SeatSelection({ total, children, selection, onClick, disabled }) {
 	const [selected, setSelected] = useState(selection);
 	const variants = {
 		open: {
-			y: "0",
-			opacWorkesition: {
+			y: 0,
+			opacity: 1,
+			transition: {
 				y: { stiffness: 1000, velocity: -100 },
 			},
 		},
@@ -36,16 +37,11 @@ function SeatSelection({ total, children, selection, onClick, disabled }) {
 				<h4>BOOK</h4>
 				<p>{selected} Tickets</p> <h4>${total}</h4>
 			</article>
-			{/* {isVisible && selection.length > 0 && ( */}
 			<Selected
 				initial={false}
 				key="modal"
 				variants={variants}
 				animate={isVisible ? "open" : "closed"}
-				// variants={routeVariants}
-				// initial="initial"
-				// animate="final"
-				// exit="final"
 				transition={{ duration: 0.3, ease: easeInOut }}>
 				<button onClick={() => setIsClicked()}>X</button>
 				{children}
@@ -57,7 +53,6 @@ function SeatSelection({ total, children, selection, onClick, disabled }) {
 					Confirm Movie Reservation
 				</Button>
 			</Selected>
-			{/* )} */}
 		</Frame>
 	);
 }
