@@ -4,7 +4,6 @@ import styled from "styled-components";
 function Navigation() {
 	const listVariants = {
 		open: {
-			zIndex: 2,
 			transition: { staggerChildren: 0.07, delayChildren: 0.2 },
 		},
 		closed: {
@@ -14,7 +13,6 @@ function Navigation() {
 
 	const variants = {
 		open: {
-			zIndex: 2,
 			y: 0,
 			opacity: 1,
 			transition: {
@@ -58,6 +56,7 @@ export default Navigation;
 
 const List = styled(m.ul)`
 	position: absolute;
+	z-index: 9;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;

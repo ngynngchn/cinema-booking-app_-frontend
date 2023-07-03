@@ -32,9 +32,9 @@ function Menu() {
 		}),
 		closed: {
 			clipPath: "circle(26px at 260px 40px)",
-			zIndex: 0,
+			zIndex: 1,
 			transition: {
-				delay: 0.4,
+				delay: 0.3,
 				type: "spring",
 				stiffness: 400,
 				damping: 40,
@@ -75,4 +75,5 @@ const Background = styled(m.div)`
 	width: 300px;
 	background: #181818c7;
 	backdrop-filter: blur(10px);
+	z-index: 8;
 `;
