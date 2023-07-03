@@ -27,7 +27,7 @@ export default MovieCard;
 const Card = styled.article`
 	border-radius: 10px;
 	position: relative;
-	height: 40vh;
+	height: 45vh;
 	scroll-snap-align: center;
 	cursor: pointer;
 	display: flex;
@@ -38,7 +38,7 @@ const Card = styled.article`
 
 const Image = styled.img`
 	object-fit: cover;
-	aspect-ratio: 1.5 / 2;
+	aspect-ratio: 11 / 16;
 	height: 100%;
 	/* width: 30vw; */
 	border-radius: 10px;
@@ -57,6 +57,7 @@ const Title = styled.h2`
 const Subtitle = styled.h3`
 	font-size: 0.8rem;
 `;
+
 // const Mirrored = styled.img`
 // 	margin-top: 1.5rem;
 // 	transform: rotateX(180deg) translateY(15px);
