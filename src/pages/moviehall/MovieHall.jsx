@@ -181,8 +181,9 @@ const Screen = styled.div`
 	border-color: #c33c3d transparent transparent transparent;
 	border-radius: 60%/100px 100px 0 0;
 `;
+
 const Header = styled.nav`
-	padding: 1rem 0.5rem;
+	/* padding: 1rem 0.5rem; */
 	section {
 		display: flex;
 		flex-direction: column;
