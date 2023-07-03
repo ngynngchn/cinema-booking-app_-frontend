@@ -73,6 +73,7 @@ const DateInput = styled.input`
 	all: unset;
 	&:checked + ${Label} {
 		background: linear-gradient(145deg, #f2f2f2, #e6e6e6);
+		box-shadow: 0 1px 10px 1px #f2f2f244;
 		color: #222222;
 	}
 `;
