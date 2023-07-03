@@ -24,10 +24,10 @@ function Home() {
 
 	const routeVariants = {
 		initial: {
-			x: "100vh",
+			y: "100vh",
 		},
 		final: {
-			x: "0vh",
+			y: "0vh",
 		},
 	};
 
