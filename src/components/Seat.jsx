@@ -1,4 +1,4 @@
-import "./Seat.css";
+// import "./Seat.css";
 import styled from "styled-components";
 
 function Seat({ data, active, onClick }) {
@@ -36,5 +36,8 @@ const SeatElement = styled.button`
 
 	&:not(:disabled):hover {
 		background: linear-gradient(145deg, #e84849, #c33c3d);
+	}
+	:disabled {
+		cursor: not-allowed;
 	}
 `;

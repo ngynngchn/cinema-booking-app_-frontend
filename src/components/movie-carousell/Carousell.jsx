@@ -57,8 +57,9 @@ function Carousell({ items }) {
 		<CarousellWindow>
 			<Wrapper
 				ref={containerRef}
-				onTouchStart={handleSwipe}
-				onTouchEnd={handleSwipe}>
+				// onTouchStart={handleSwipe}
+				// onTouchEnd={handleSwipe}
+			>
 				{/*AnimatePresence is necessary to show the items after they are deleted because only max. 3 are shown*/}
 				<AnimatePresence mode="popLayout" initial={false}>
 					{visibleItems.map((item) => {

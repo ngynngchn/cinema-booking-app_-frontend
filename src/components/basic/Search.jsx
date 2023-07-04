@@ -18,7 +18,6 @@ const Input = styled.input`
 	padding: 0.4rem 0.3rem;
 	padding-left: 28px;
 	width: 2rem;
-
 	background-color: grey;
 	border-radius: 5px;
 	transition: width 0.3s ease-in-out;

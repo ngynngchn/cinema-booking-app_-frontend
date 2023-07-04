@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion as m } from "framer-motion";
 
-import Search from "../../components/basic/Search";
 import Carousell from "../../components/movie-carousell/Carousell";
 
 import styled from "styled-components";
-import MenuToggle from "../../components/menu/MenuToggle";
 import Menu from "../../components/menu/Menu";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
-
+	const apiKey = import.meta.env.VITE_API_KEY;
 	// (1) update current movies
 	useEffect(() => {
 		fetch(
-			"https://api.themoviedb.org/3/movie/now_playing?api_key=d603b23be9d778e54ec780db901ad054&language=en-US&page=1&region=DE"
+			`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1&region=DE`
 		)
 			.then((response) => response.json())
 			.then((data) => setCurrentMovies(data.results));
@@ -71,6 +69,16 @@ const Window = styled(m.main)`
 	width: 100%;
 	overflow-x: scroll;
 	height: 100%;
+	::before {
+		content: " ";
+		position: absolute;
+		inset: 50% 50%;
+		background-color: white;
+		box-shadow: 0 0 150px 150px #ffffff5a;
+		width: 1px;
+		height: 1px;
+		border-radius: 50%;
+	}
 `;
 const Head = styled.div`
 	padding: 1rem;

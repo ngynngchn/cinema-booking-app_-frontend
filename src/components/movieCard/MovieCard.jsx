@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function MovieCard({ data }) {
 	const navigate = useNavigate();
-	console.log(data);
+
 	return (
 		<Card onClick={() => navigate(`movie/${data.id}`)}>
 			{/* <Title>{data.original_title}</Title> */}
