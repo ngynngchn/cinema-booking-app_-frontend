@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { v4 as uuid4 } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion as m } from "framer-motion";
-import "./MovieHall.css";
 
 import styled from "styled-components";
 import Confirmation from "../../components/confirmation/Confirmation.jsx";
@@ -23,11 +22,11 @@ function MovieHall() {
 	const [details, setDetails] = useState();
 
 	const url = import.meta.env.VITE_BACKEND;
-	const params = useParams();
+	const { id } = useParams();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(url + `/api/reservations/${params.id}`)
+		fetch(url + `/api/reservations/${id}`)
 			.then((response) => response.json())
 			.then((data) => {
 				setSeats(data.seats);
@@ -67,7 +66,7 @@ function MovieHall() {
 
 	const handleSubmit = () => {
 		if (selection.length > 0) {
-			fetch(url + `/api/new-reservation/${params.id}`, {
+			fetch(url + `/api/new-reservation/${id}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(selection),
@@ -101,7 +100,7 @@ function MovieHall() {
 			animate="final"
 			exit="initial"
 			transition={{ duration: 0.2 }}
-			key={params.id}>
+			key={id}>
 			{confirm && (
 				<Confirmation
 					data={selection}

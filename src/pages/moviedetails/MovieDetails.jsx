@@ -7,12 +7,12 @@ import FavoriteButton from "../../components/basic/FavoriteButton.jsx";
 
 function MovieDetails() {
 	const [details, setDetails] = useState();
-	const params = useParams();
+	const { id } = useParams();
 	const apiKey = import.meta.env.VITE_API_KEY;
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}`)
+		fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
 			.then((response) => response.json())
 			.then((data) => setDetails(data))
 			.catch((err) => console.log(err));
@@ -21,10 +21,21 @@ function MovieDetails() {
 
 	const routeVariants = {
 		initial: {
-			x: "100%",
+			// x: "100%",
+			scale: 0.4,
+			// opacity: 0,
 		},
 		final: {
-			x: "0vw",
+			scale: 1,
+			// opacity: 1,
+			transition: {
+				duration: 0.3,
+			},
+			// x: "0vw",
+		},
+		exit: {
+			opacity: 0,
+			scale: 0.2,
 		},
 	};
 
@@ -34,9 +45,10 @@ function MovieDetails() {
 			variants={routeVariants}
 			initial="initial"
 			animate="final"
-			exit="initial"
+			exit="exit"
 			transition={{ duration: 0.2 }}
-			key="moviedetails">
+			key={`details-${id}`}
+			layoutId={`movie-${id}`}>
 			{/* <m.img
 				layoutId="poster"
 				transition={{ duration: 0.3 }}
@@ -61,7 +73,7 @@ function MovieDetails() {
 			</Description>
 			<BookingButton
 				whileTap={{ scale: 0.97 }}
-				onClick={() => navigate(`/booking/${params.id}`)}>
+				onClick={() => navigate(`/booking/${id}`)}>
 				Buy Ticket
 			</BookingButton>
 		</Window>
