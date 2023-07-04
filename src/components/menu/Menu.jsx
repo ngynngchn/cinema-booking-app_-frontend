@@ -65,6 +65,8 @@ const MenuContainer = styled(m.nav)`
 	right: 0;
 	bottom: 0;
 	width: 300px;
+	height: 100%;
+	overflow-y: scroll;
 `;
 
 const Background = styled(m.div)`
