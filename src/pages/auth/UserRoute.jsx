@@ -19,14 +19,10 @@ function UserRoute() {
 				if (response.ok) {
 					setIsLoading(false);
 				} else {
-					await fetch(url + "/api/logout", {
-						method: "POST",
-						credentials: "include",
-					});
 					navigate("/login");
 				}
 			} catch (error) {
-				console.log(error);
+				console.log("You need to log in");
 			}
 		};
 		authenticate();

@@ -1,12 +1,16 @@
 import { motion as m } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 import SearchField from "../basic/SearchField";
 import SearchOutput from "../basic/SearchOutput";
-import { useState } from "react";
 
 function Navigation() {
 	const [term, setTerm] = useState("");
+
+	const url = import.meta.env.VITE_BACKEND;
+
+	const navigate = useNavigate();
 
 	const listVariants = {
 		open: {
@@ -38,27 +42,43 @@ function Navigation() {
 		setTerm(e.target.value);
 	};
 
-	const handleLogout = () => {};
+	const logout = async () => {
+		try {
+			const result = await fetch(url + "/api/logout", {
+				method: "POST",
+				credentials: "include",
+			});
+			navigate("/");
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<List variants={listVariants}>
 			<Element
 				variants={variants}
-				whileHover={{ scale: 1.1 }}
-				whileTap={{ scale: 0.95 }}>
+				whileHover={{ scale: 0.98 }}
+				whileTap={{ scale: 0.96 }}>
 				<Link>Profile</Link>
 			</Element>
 			<Element
 				variants={variants}
-				whileHover={{ scale: 1.1 }}
-				whileTap={{ scale: 0.95 }}>
+				whileHover={{ scale: 0.98 }}
+				whileTap={{ scale: 0.96 }}>
 				<Link>Previous Reservations</Link>
 			</Element>
 			<Element
 				variants={variants}
-				whileHover={{ scale: 1.1 }}
-				whileTap={{ scale: 0.95 }}>
-				<button onClick={() => handleLogout}>Log out</button>
+				whileHover={{ scale: 0.98 }}
+				whileTap={{ scale: 0.96 }}>
+				<Link>Bookmarked Movies</Link>
+			</Element>
+			<Element
+				variants={variants}
+				whileHover={{ scale: 0.98 }}
+				whileTap={{ scale: 0.96 }}>
+				<button onClick={logout}>Log out</button>
 			</Element>
 			<SearchField onChange={handleChange} />
 			<SearchOutput searchTerm={term} />
@@ -83,4 +103,7 @@ const List = styled(m.ul)`
 const Element = styled(m.li)`
 	list-style-type: none;
 	text-align: left;
+	a {
+		background: none;
+	}
 `;

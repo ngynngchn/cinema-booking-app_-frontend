@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion as m } from "framer-motion";
 
 import Carousell from "../../components/movie-carousell/Carousell";
+import Header from "../../components/basic/Header.jsx";
 
 import styled from "styled-components";
 import Menu from "../../components/menu/Menu";
@@ -36,11 +37,10 @@ function Home() {
 			initial="initial"
 			animate="final"
 			transition={{ duration: 0.3 }}>
-			<Head>
-				<h2>Now in theatres</h2>
+			<Header>
 				{/* <Search /> */}
 				<Menu />
-			</Head>
+			</Header>
 			<h3>Showing Now</h3>
 			<Carousell items={currentMovies} />
 			{/* <Carousell>
@@ -63,6 +63,7 @@ export default Home;
 // `;
 
 const Window = styled(m.main)`
+	padding-top: 1rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -79,10 +80,4 @@ const Window = styled(m.main)`
 		height: 1px;
 		border-radius: 50%;
 	}
-`;
-const Head = styled.div`
-	padding: 1rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 `;

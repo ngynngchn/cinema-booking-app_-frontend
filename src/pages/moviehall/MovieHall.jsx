@@ -6,12 +6,13 @@ import { motion as m } from "framer-motion";
 import styled from "styled-components";
 import Confirmation from "../../components/confirmation/Confirmation.jsx";
 import GoBack from "../../components/basic/GoBack.jsx";
+import Header from "../../components/basic/Header.jsx";
 import SeatingPlan from "../../components/SeatingPlan.jsx";
 import SeatSelection from "../../components/SeatSelection.jsx";
 import Row from "../../components/Row";
 import DateSelector from "../../components/DateSelector";
 import TimeSelector from "../../components/TimeSelector";
-
+import Menu from "../../components/menu/Menu.jsx";
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
 
 function MovieHall() {
@@ -110,10 +111,8 @@ function MovieHall() {
 			)}
 			<Header>
 				<GoBack />
-				<section className="movieDetails">
-					<h3>{details.title}</h3>
-				</section>
-				<GoBack />
+				<Title>{details.title}</Title>
+				<Menu />
 			</Header>
 
 			<main>
@@ -181,32 +180,8 @@ const Screen = styled.div`
 	border-radius: 60%/100px 100px 0 0;
 `;
 
-const Header = styled.nav`
-	/* padding: 1rem 0.5rem; */
-	section {
-		display: flex;
-		flex-direction: column;
-		padding: 0.5rem;
-		width: 100%;
-		align-items: center;
-		h3 {
-			font-size: 1rem;
-		}
-	}
-`;
-
-const Date = styled.p`
-	background-color: #292929;
-	border-radius: 5px;
-	padding: 0.5rem;
-	margin: 1rem;
-`;
-
-const Button = styled.button`
-	border-radius: 10px;
-	background: linear-gradient(145deg, #e84849, #c33c3d);
-	box-shadow: 0px 10px 100px 0px #c4504178;
-	/* margin: 1rem; */
-	width: 100%;
-	justify-content: flex-end;
+const Title = styled.h3`
+	width: 200px;
+	font-size: 1rem;
+	margin-inline: 0 auto;
 `;
