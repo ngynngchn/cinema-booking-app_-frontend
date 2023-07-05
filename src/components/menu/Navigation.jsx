@@ -38,6 +38,8 @@ function Navigation() {
 		setTerm(e.target.value);
 	};
 
+	const handleLogout = () => {};
+
 	return (
 		<List variants={listVariants}>
 			<Element
@@ -56,7 +58,7 @@ function Navigation() {
 				variants={variants}
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.95 }}>
-				<Link>Logout</Link>
+				<button onClick={() => handleLogout}>Log out</button>
 			</Element>
 			<SearchField onChange={handleChange} />
 			<SearchOutput searchTerm={term} />
