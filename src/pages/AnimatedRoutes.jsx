@@ -18,10 +18,10 @@ function AnimatedRoutes() {
 			<Routes location={location} key={location.key}>
 				<Route element={<AdminRoute />}>
 					<Route path="/admin" element={<Admin />} />
+					<Route path="/test" element={<AdminTest />} />
 				</Route>
 				<Route element={<UserRoute />}>
 					<Route path="/" element={<Home />} />
-					<Route path="/test" element={<AdminTest />} />
 					<Route path="/booking/:id" element={<MovieHall />} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 				</Route>

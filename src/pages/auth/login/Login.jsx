@@ -10,20 +10,6 @@ function Login() {
 	const navigate = useNavigate();
 	const googleButton = useRef();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const form = new FormData(e.target);
-		try {
-			const response = await fetch(url + "/api/login", {
-				method: "POST",
-				credentials: "include",
-				body: form,
-			});
-		} catch (error) {
-			console.log("Error");
-		}
-	};
-
 	// google Oauth
 	const handleCallbackResponse = async (res) => {
 		try {

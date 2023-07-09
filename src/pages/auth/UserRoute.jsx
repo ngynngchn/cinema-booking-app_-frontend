@@ -12,7 +12,7 @@ function UserRoute() {
 	useEffect(() => {
 		const authenticate = async () => {
 			try {
-				const response = await fetch(url + "/api/authenticate", {
+				const response = await fetch(url + "/api/user", {
 					method: "POST",
 					credentials: "include",
 				});
@@ -20,9 +20,10 @@ function UserRoute() {
 					setIsLoading(false);
 				} else {
 					navigate("/login");
+					throw new Error();
 				}
 			} catch (error) {
-				console.log("You need to log in");
+				console.log("Please log in to continue");
 			}
 		};
 		authenticate();

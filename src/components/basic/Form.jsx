@@ -1,7 +1,8 @@
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 function Form({ type }) {
 	const url = import.meta.env.VITE_BACKEND;
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -14,6 +15,7 @@ function Form({ type }) {
 			});
 			let message = await response.json();
 			console.log(message.message);
+			navigate("/");
 		} catch (error) {
 			console.log("Error", error);
 		}
