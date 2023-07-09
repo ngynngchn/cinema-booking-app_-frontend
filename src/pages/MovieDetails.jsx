@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion as m } from "framer-motion";
 import styled from "styled-components";
-import BackButton from "../../components/basic/GoBack.jsx";
-import FavoriteButton from "../../components/basic/FavoriteButton.jsx";
+import BackButton from "../components/basic/GoBack.jsx";
+import FavoriteButton from "../components/basic/FavoriteButton.jsx";
 
 function MovieDetails() {
 	const [details, setDetails] = useState();

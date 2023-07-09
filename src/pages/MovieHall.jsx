@@ -4,15 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion as m } from "framer-motion";
 
 import styled from "styled-components";
-import Confirmation from "../../components/confirmation/Confirmation.jsx";
-import GoBack from "../../components/basic/GoBack.jsx";
-import Header from "../../components/basic/Header.jsx";
-import SeatingPlan from "../../components/SeatingPlan.jsx";
-import SeatSelection from "../../components/SeatSelection.jsx";
-import Row from "../../components/Row";
-import DateSelector from "../../components/DateSelector";
-import TimeSelector from "../../components/TimeSelector";
-import Menu from "../../components/menu/Menu.jsx";
+import Confirmation from "../components/confirmation/Confirmation.jsx";
+import GoBack from "../components/basic/GoBack.jsx";
+import Header from "../components/basic/Header.jsx";
+import SeatingPlan from "../components/SeatingPlan.jsx";
+import SeatSelection from "../components/SeatSelection.jsx";
+import Row from "../components/Row";
+import DateSelector from "../components/DateSelector";
+import TimeSelector from "../components/TimeSelector";
+import Menu from "../components/menu/Menu.jsx";
 // TODO: After booking the tickets, it should display something like : Thank you for booking the tickets! Enjoy your movie and redirect back to /home
 
 function MovieHall() {

@@ -1,3 +1,4 @@
+import { motion as m } from "framer-motion";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 function Form({ type }) {
@@ -41,7 +42,11 @@ function Form({ type }) {
 					<input type="password" name="cpwd" id="cpwd" />
 				</>
 			)}
-			<Submit type="submit" value={`${type.toUpperCase()}`} />
+			<Submit
+				whileTap={{ scale: 0.97 }}
+				type="submit"
+				value={`${type.toUpperCase()}`}
+			/>
 		</FormContainer>
 	);
 }
@@ -67,11 +72,13 @@ const FormContainer = styled.form`
 	}
 `;
 
-const Submit = styled.input.attrs({ type: "submit" })`
+const Submit = styled(m.input).attrs({ type: "submit" })`
 	background: linear-gradient(145deg, #e84849, #c33c3d);
 	box-shadow: 0px 10px 100px 0px #c4504178;
 	border-radius: 4px;
 	margin: 1rem 0;
 	padding: 0.5rem;
 	border: none;
+	color: white;
+	cursor: pointer;
 `;

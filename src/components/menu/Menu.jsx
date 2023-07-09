@@ -45,6 +45,7 @@ function Menu() {
 	return (
 		<MenuContainer
 			initial={false}
+			variants={sidebar}
 			animate={isOpen ? "open" : "closed"}
 			custom={height}
 			ref={containerRef}>

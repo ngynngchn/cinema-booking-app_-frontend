@@ -1,13 +1,12 @@
 import { AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
-import MovieHall from "./moviehall/MovieHall.jsx";
-import Home from "./home/Home.jsx";
-import Admin from "./admin/Admin.jsx";
-import MovieDetails from "./moviedetails/MovieDetails.jsx";
+import MovieHall from "./MovieHall.jsx";
+import AdminTest from "./AdminTest";
+import Home from "./Home.jsx";
+import MovieDetails from "./MovieDetails.jsx";
 import AdminRoute from "./auth/AdminRoute";
 import UserRoute from "./auth/UserRoute";
-import AdminTest from "./AdminTest";
-import Login from "./auth/login/Login.jsx";
+import Login from "./auth/Login.jsx";
 import Register from "./auth/Register.jsx";
 
 function AnimatedRoutes() {
@@ -17,8 +16,7 @@ function AnimatedRoutes() {
 		<AnimatePresence mode="wait">
 			<Routes location={location} key={location.key}>
 				<Route element={<AdminRoute />}>
-					<Route path="/admin" element={<Admin />} />
-					<Route path="/test" element={<AdminTest />} />
+					<Route path="/admin" element={<AdminTest />} />
 				</Route>
 				<Route element={<UserRoute />}>
 					<Route path="/" element={<Home />} />

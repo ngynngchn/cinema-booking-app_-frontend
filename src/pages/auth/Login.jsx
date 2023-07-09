@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
-import Form from "../../../components/basic/Form";
+import Form from "../../components/basic/Form";
 
 function Login() {
 	const url = import.meta.env.VITE_BACKEND;

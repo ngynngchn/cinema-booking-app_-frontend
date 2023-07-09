@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion as m } from "framer-motion";
 
-import Carousell from "../../components/movie-carousell/Carousell";
-import Header from "../../components/basic/Header.jsx";
+import Carousell from "../components/movie-carousell/Carousell";
+import Header from "../components/basic/Header.jsx";
 
 import styled from "styled-components";
-import Menu from "../../components/menu/Menu";
+import Menu from "../components/menu/Menu";
 
 function Home() {
 	const [currentMovies, setCurrentMovies] = useState();
