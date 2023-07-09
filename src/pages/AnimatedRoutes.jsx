@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
 import MovieHall from "./moviehall/MovieHall.jsx";
 import Home from "./home/Home.jsx";
@@ -7,7 +8,7 @@ import AdminRoute from "./auth/AdminRoute";
 import UserRoute from "./auth/UserRoute";
 import AdminTest from "./AdminTest";
 import Login from "./auth/login/Login.jsx";
-import { AnimatePresence } from "framer-motion";
+import Register from "./auth/Register.jsx";
 
 function AnimatedRoutes() {
 	const location = useLocation();
@@ -25,6 +26,7 @@ function AnimatedRoutes() {
 					<Route path="/movie/:id" element={<MovieDetails />} />
 				</Route>
 				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
 			</Routes>
 		</AnimatePresence>
 	);
