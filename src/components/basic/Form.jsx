@@ -1,6 +1,8 @@
 import { motion as m } from "framer-motion";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import InputField from "./InputField";
+
 function Form({ type }) {
 	const url = import.meta.env.VITE_BACKEND;
 	const navigate = useNavigate();
@@ -26,22 +28,18 @@ function Form({ type }) {
 		<FormContainer onSubmit={handleSubmit}>
 			{type == "register" && (
 				<>
-					<label htmlFor="fname">Your First Name</label>
-					<input type="fname" name="fname" id="fname" />
-					<label htmlFor="lname">Your Last Name</label>
-					<input type="lname" name="lname" id="lname" />
+					<InputField type="text" name="fname" placeholder="" />
+					<InputField type="text" name="lname" placeholder="" />
 				</>
 			)}
-			<label htmlFor="email">Your Email</label>
-			<input type="email" name="email" id="email" />
-			<label htmlFor="pwd">Your Password</label>
-			<input type="password" name="pwd" id="pwd" />
+
+			<InputField type="email" name="email" placeholder="" />
+			<InputField type="password" name="password" placeholder="" />
+
 			{type == "register" && (
-				<>
-					<label htmlFor="cpwd">Confirm your Password</label>
-					<input type="password" name="cpwd" id="cpwd" />
-				</>
+				<InputField type="password" name="confirmPassword" placeholder="" />
 			)}
+
 			<Submit
 				whileTap={{ scale: 0.97 }}
 				type="submit"
